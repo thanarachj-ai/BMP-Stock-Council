@@ -6,22 +6,29 @@
   <title>BMP Stock Council Team</title>
   <style>
     :root {
-      --paper: #f5efe1;
-      --paper-2: #fbf7ec;
-      --ink: #17221f;
-      --muted: #66706a;
-      --line: #24332f;
-      --sidebar: #efe5d0;
-      --shadow: #16261f;
-      --green: #3b7d64;
-      --teal: #2a8f8a;
-      --blue: #3f6fb6;
-      --violet: #7955a3;
-      --rose: #b25770;
-      --amber: #c48231;
-      --olive: #6f8738;
-      --red: #b85c42;
-      --radius: 18px;
+      --green: #006241;
+      --green-accent: #00754a;
+      --house-green: #1e3932;
+      --green-uplift: #2b5148;
+      --green-light: #d4e9e2;
+      --gold: #cba258;
+      --gold-light: #dfc49d;
+      --gold-lightest: #faf6ee;
+      --canvas: #f2f0eb;
+      --ceramic: #edebe9;
+      --surface: #ffffff;
+      --surface-cool: #f9f9f9;
+      --text: rgba(0, 0, 0, 0.87);
+      --text-soft: rgba(0, 0, 0, 0.58);
+      --border: rgba(30, 57, 50, 0.16);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+      --shadow-lift: 0 2px 8px rgba(0, 0, 0, 0.08), 0 18px 48px rgba(0, 0, 0, 0.10);
+      --radius-card: 12px;
+      --radius-pill: 50px;
+      --page-max: 1440px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --font-sans: "Avenir Next", "Segoe UI", "Noto Sans", system-ui, -apple-system, sans-serif;
+      --font-mono: "SFMono-Regular", "Menlo", "Consolas", monospace;
     }
 
     * {
@@ -34,13 +41,10 @@
 
     body {
       margin: 0;
-      background:
-        linear-gradient(90deg, rgba(23, 34, 31, 0.035) 1px, transparent 1px) 0 0 / 38px 38px,
-        linear-gradient(rgba(23, 34, 31, 0.03) 1px, transparent 1px) 0 0 / 38px 38px,
-        var(--paper);
-      color: var(--ink);
-      font-family: "Avenir Next", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
+      color: var(--text);
+      background: var(--canvas);
+      font-family: var(--font-sans);
+      letter-spacing: -0.01em;
       overflow-x: hidden;
     }
 
@@ -49,950 +53,1165 @@
       text-decoration: none;
     }
 
-    .layout {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      width: 100%;
-      min-width: 0;
+    button {
+      font: inherit;
     }
 
-    .sidebar {
+    .shell {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 14% 8%, rgba(212, 233, 226, 0.84), transparent 30%),
+        linear-gradient(180deg, #ffffff 0, var(--canvas) 380px, #ffffff 680px);
+    }
+
+    .topbar {
       position: sticky;
       top: 0;
-      height: 100vh;
-      min-width: 0;
-      padding: 28px 20px 22px;
-      background: var(--sidebar);
-      border-right: 2px solid rgba(36, 51, 47, 0.16);
-      display: flex;
-      flex-direction: column;
+      z-index: 20;
+      min-height: 83px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .topbar-inner {
+      width: min(var(--page-max), 100%);
+      min-height: 83px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
       gap: 28px;
     }
 
     .brand {
-      display: grid;
-      grid-template-columns: 46px 1fr;
+      display: inline-grid;
+      grid-template-columns: 48px auto;
       gap: 12px;
       align-items: center;
+      min-width: 0;
     }
 
-    .brand-mark {
-      width: 46px;
+    .brand-seal {
+      width: 48px;
       aspect-ratio: 1;
-      border: 2px solid var(--line);
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 68% 30%, #f9d36f 0 10px, transparent 11px),
-        linear-gradient(135deg, #143d35, #2d8a79);
-      box-shadow: 4px 5px 0 var(--shadow);
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      color: #fff6df;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 42%, #ffffff 43% 47%, transparent 48%),
+        linear-gradient(135deg, var(--green), var(--house-green));
+      box-shadow: 0 0 0 3px var(--house-green);
+      font-size: 12px;
       font-weight: 900;
-      font-size: 15px;
+      letter-spacing: 0.03em;
     }
 
     .brand-title {
       margin: 0;
-      font-size: 18px;
-      line-height: 1.02;
-      font-weight: 900;
+      color: var(--house-green);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.05;
     }
 
     .brand-subtitle {
-      margin-top: 4px;
-      color: var(--muted);
+      margin-top: 2px;
+      color: var(--text-soft);
       font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
-    .nav-label {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .nav-group {
-      display: grid;
+    .nav {
+      display: flex;
+      justify-content: center;
       gap: 8px;
-    }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 38px;
-      padding: 9px 11px;
-      border: 1.5px solid rgba(36, 51, 47, 0.2);
-      border-radius: 999px;
-      color: #263532;
-      background: rgba(251, 247, 236, 0.64);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .nav-link span:last-child {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .side-note {
-      margin-top: auto;
-      padding: 16px;
-      border: 2px solid rgba(36, 51, 47, 0.18);
-      border-radius: 16px;
-      background: rgba(251, 247, 236, 0.65);
-      color: #33413d;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .main {
       min-width: 0;
-      padding: 54px clamp(24px, 5vw, 72px) 48px;
     }
 
-    .hero {
-      min-width: 0;
-      min-height: 430px;
-      display: grid;
-      align-content: center;
-      padding-bottom: 46px;
-      border-bottom: 2px solid rgba(36, 51, 47, 0.14);
-    }
-
-    .kicker {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 64px;
-      height: 3px;
-      background: currentColor;
-      border-radius: 99px;
-    }
-
-    h1 {
-      width: 100%;
-      max-width: 1020px;
-      margin: 22px 0 18px;
-      font-family: "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
-      font-size: clamp(52px, 9vw, 132px);
-      line-height: 0.88;
-      font-weight: 900;
-      letter-spacing: 0;
-      overflow-wrap: anywhere;
-    }
-
-    .intro {
-      width: 100%;
-      max-width: 840px;
-      margin: 0;
-      color: #3c4945;
-      font-size: clamp(17px, 1.8vw, 22px);
-      line-height: 1.55;
-    }
-
-    .tabs {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: max-content;
-      max-width: 100%;
-      min-width: 0;
-      margin: 34px 0 34px;
-      padding: 5px;
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper-2);
-      box-shadow: 5px 6px 0 rgba(22, 38, 31, 0.18);
-    }
-
-    .tab {
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--ink);
-      cursor: pointer;
+    .nav a {
       min-height: 44px;
-      padding: 0 22px;
-      font: inherit;
-      font-weight: 900;
+      padding: 12px 18px;
+      border-radius: var(--radius-pill);
+      color: rgba(0, 0, 0, 0.72);
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 160ms ease, color 160ms ease;
       white-space: nowrap;
     }
 
-    .tab[aria-selected="true"] {
-      background: var(--ink);
-      color: #fff9ea;
+    .nav a:hover {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: end;
+    }
+
+    .pill {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 22px;
+      border-radius: var(--radius-pill);
+      border: 1px solid currentColor;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 160ms ease, background 160ms ease;
+      white-space: nowrap;
+    }
+
+    .pill:active {
+      transform: scale(0.96);
+    }
+
+    .pill-primary {
+      color: #ffffff;
+      background: var(--green-accent);
+      border-color: var(--green-accent);
+      box-shadow: 0 8px 22px rgba(0, 117, 74, 0.22);
+    }
+
+    .pill-primary:hover {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .pill-outline {
+      color: var(--green-accent);
+      background: transparent;
+      border-color: var(--green-accent);
+    }
+
+    .pill-black {
+      color: #ffffff;
+      background: #000000;
+      border-color: #000000;
+    }
+
+    .section {
+      width: min(var(--page-max), 100%);
+      margin: 0 auto;
+      padding: 72px var(--gutter);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      right: clamp(16px, 8vw, 112px);
+      top: 118px;
+      border: 42px solid rgba(212, 233, 226, 0.72);
+    }
+
+    .hero::after {
+      width: 120px;
+      height: 120px;
+      left: clamp(16px, 9vw, 126px);
+      bottom: 96px;
+      background: rgba(223, 196, 157, 0.34);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 920px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--green);
+      font-size: clamp(44px, 7vw, 92px);
+      line-height: 1.04;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 22px auto 0;
+      color: rgba(0, 0, 0, 0.72);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .floating-gate {
+      position: absolute;
+      right: clamp(18px, 7vw, 96px);
+      bottom: 60px;
+      z-index: 2;
+      width: 92px;
+      aspect-ratio: 1;
+      border: 8px solid #ffffff;
+      border-radius: 50%;
+      background: var(--green-accent);
+      color: #ffffff;
+      box-shadow: var(--shadow-lift);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transform: rotate(-8deg);
+    }
+
+    .floating-gate strong {
+      display: block;
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .floating-gate span {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tabs-wrap {
+      position: sticky;
+      top: 83px;
+      z-index: 15;
+      background: rgba(255, 255, 255, 0.9);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .tabs {
+      width: min(var(--page-max), 100%);
+      margin: 0 auto;
+      padding: 14px var(--gutter);
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tab[aria-pressed="true"] {
+      color: #ffffff;
+      background: #000000;
+      border-color: #000000;
     }
 
     .panel {
-      display: none;
-      min-width: 0;
+      display: block;
     }
 
     .panel.active {
       display: block;
     }
 
-    .section-head {
-      display: flex;
+    #team,
+    #pipeline,
+    #guardrails {
+      scroll-margin-top: 170px;
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: clamp(24px, 6vw, 80px);
       align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin: 0 0 22px;
+      margin-bottom: 36px;
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 52px);
-      line-height: 0.98;
-      font-weight: 950;
+    .section-kicker {
+      color: rgba(0, 0, 0, 0.46);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
-    .section-head p {
-      max-width: 520px;
+    h2 {
+      margin: 10px 0 0;
+      color: var(--green);
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    .section-title p {
       margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.55;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.62;
     }
 
     .team-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 22px;
-      min-width: 0;
     }
 
     .member-card {
       --accent: var(--green);
       min-width: 0;
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper-2);
-      box-shadow: 7px 9px 0 var(--shadow);
       overflow: hidden;
-      transform: translateY(0);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: var(--radius-card);
+      background: #ffffff;
+      box-shadow: var(--shadow);
       transition: transform 160ms ease, box-shadow 160ms ease;
     }
 
     .member-card:hover {
       transform: translateY(-4px);
-      box-shadow: 9px 13px 0 var(--shadow);
+      box-shadow: var(--shadow-lift);
     }
 
-    .badge {
-      position: relative;
+    .card-swatch {
+      height: 116px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.25), transparent 24%),
+        linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 72%, #000000));
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .role-badge {
       display: inline-flex;
       align-items: center;
-      min-height: 26px;
-      margin: 14px 14px 0;
-      padding: 4px 10px;
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      background: var(--accent);
-      color: #fff9ea;
-      font-size: 10px;
-      font-weight: 950;
-      letter-spacing: 0.11em;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .portrait {
-      position: relative;
-      margin: 12px 14px 0;
-      aspect-ratio: 1 / 0.72;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, color-mix(in srgb, var(--accent) 82%, #ffffff), color-mix(in srgb, var(--accent) 48%, #1d2a27)),
-        var(--accent);
-    }
-
-    .portrait::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background:
-        radial-gradient(circle at 24% 28%, rgba(255, 250, 232, 0.78) 0 9%, transparent 10%),
-        radial-gradient(circle at 78% 18%, rgba(255, 250, 232, 0.55) 0 7%, transparent 8%),
-        linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px) 0 0 / 20px 20px,
-        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px) 0 0 / 20px 20px;
-      transform: rotate(-8deg);
-    }
-
-    .portrait::after {
-      content: attr(data-initials);
-      position: absolute;
-      inset: auto 16px 12px auto;
-      width: 70px;
+    .initial {
+      width: 58px;
       aspect-ratio: 1;
       display: grid;
       place-items: center;
-      border: 2px solid var(--line);
+      border: 3px solid rgba(255, 255, 255, 0.78);
       border-radius: 50%;
-      background: #fff7df;
-      color: var(--line);
-      box-shadow: 4px 4px 0 rgba(22, 38, 31, 0.35);
-      font-family: Georgia, serif;
-      font-size: 24px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      font-size: 20px;
       font-weight: 900;
     }
 
-    .signal {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      display: grid;
-      gap: 7px;
-      width: min(52%, 122px);
+    .member-body {
+      padding: 18px;
     }
 
-    .signal i {
-      display: block;
-      height: 7px;
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 249, 234, 0.78);
-    }
-
-    .signal i:nth-child(2) {
-      width: 78%;
-    }
-
-    .signal i:nth-child(3) {
-      width: 58%;
-    }
-
-    .card-body {
-      padding: 14px 16px 18px;
-    }
-
-    .name {
+    .member-body h3 {
       margin: 0;
-      font-family: "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
-      font-size: clamp(28px, 3vw, 42px);
-      line-height: 0.96;
-      font-weight: 900;
+      color: var(--house-green);
+      font-size: 24px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.025em;
     }
 
-    .role {
-      margin: 9px 0 10px;
-      color: #24332f;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    .member-role {
+      margin-top: 8px;
+      color: rgba(0, 0, 0, 0.55);
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.07em;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
       text-transform: uppercase;
     }
 
-    .card-body p {
-      margin: 0;
-      color: #46524e;
-      font-size: 13px;
-      line-height: 1.5;
+    .member-body p {
+      margin: 14px 0 0;
+      color: rgba(0, 0, 0, 0.64);
+      font-size: 15px;
+      line-height: 1.58;
     }
 
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 18px;
     }
 
     .chip {
-      padding: 5px 8px;
-      border: 1px solid rgba(36, 51, 47, 0.25);
-      border-radius: 999px;
-      background: rgba(245, 239, 225, 0.78);
-      color: #34413d;
-      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-cool);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      color: rgba(0, 0, 0, 0.70);
+      font-size: 12px;
       font-weight: 800;
     }
 
-    .pipeline-wrap {
-      display: grid;
-      gap: 18px;
-      min-width: 0;
+    .pipeline-feature {
+      background: var(--house-green);
+      color: #ffffff;
     }
 
-    .flow-map {
-      position: relative;
-      display: grid;
-      gap: 18px;
-      padding: 6px 0 0;
-      min-width: 0;
+    .pipeline-feature .section-title {
+      color: #ffffff;
     }
 
-    .stage {
-      display: grid;
-      grid-template-columns: 160px minmax(0, 1fr) 190px;
-      gap: 18px;
-      align-items: stretch;
+    .pipeline-feature .section-kicker,
+    .pipeline-feature .section-title p {
+      color: rgba(255, 255, 255, 0.72);
     }
 
-    .stage-number {
+    .pipeline-feature h2 {
+      color: #ffffff;
+    }
+
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+    }
+
+    .pipeline-visual {
+      position: sticky;
+      top: 172px;
+      min-height: 420px;
       display: grid;
       place-items: center;
-      border: 2px solid var(--line);
-      border-radius: 18px;
-      background: var(--paper-2);
-      box-shadow: 5px 6px 0 rgba(22, 38, 31, 0.22);
-      min-height: 128px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(212, 233, 226, 0.26), transparent 48%),
+        rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      overflow: hidden;
     }
 
-    .stage-number strong {
-      font-family: Georgia, serif;
-      font-size: 48px;
-      line-height: 1;
+    .pipeline-ring {
+      position: relative;
+      width: min(78vw, 390px);
+      aspect-ratio: 1;
+      border: 28px solid rgba(212, 233, 226, 0.32);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
     }
 
-    .stage-number span {
-      color: var(--muted);
+    .pipeline-ring::before,
+    .pipeline-ring::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .pipeline-ring::before {
+      inset: 54px;
+      border: 1px dashed rgba(255, 255, 255, 0.52);
+    }
+
+    .pipeline-ring::after {
+      width: 112px;
+      aspect-ratio: 1;
+      background: var(--gold);
+      right: -20px;
+      bottom: 28px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .ring-core {
+      position: relative;
+      z-index: 2;
+      width: 178px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-lift);
+    }
+
+    .ring-core strong {
+      display: block;
+      font-size: 42px;
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+    }
+
+    .ring-core span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(0, 0, 0, 0.58);
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .stage-card {
-      position: relative;
-      min-width: 0;
-      padding: 20px 22px;
-      border: 2px solid var(--line);
-      border-radius: 18px;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,0.54), rgba(255,255,255,0.18)),
-        var(--paper-2);
-      box-shadow: 6px 8px 0 var(--shadow);
-      overflow: hidden;
+    .pipeline-list {
+      display: grid;
+      gap: 14px;
     }
 
-    .stage-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 10px;
-      background: var(--accent, var(--green));
+    .stage-card {
+      --accent: var(--green-light);
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      padding: 20px;
+      border-radius: var(--radius-card);
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .stage-num {
+      width: 58px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--house-green);
+      font-size: 22px;
+      font-weight: 900;
     }
 
     .stage-card h3 {
-      margin: 0 0 8px;
-      font-size: clamp(22px, 3vw, 34px);
-      line-height: 1;
+      margin: 0;
+      color: var(--house-green);
+      font-size: 24px;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
     }
 
     .stage-card p {
-      margin: 0;
-      color: #485550;
+      margin: 8px 0 0;
+      color: rgba(0, 0, 0, 0.62);
       font-size: 15px;
-      line-height: 1.55;
+      line-height: 1.58;
     }
 
-    .handoff {
-      display: grid;
-      align-content: center;
-      gap: 8px;
-      padding: 16px;
-      border: 2px dashed rgba(36, 51, 47, 0.5);
-      border-radius: 18px;
-      background: rgba(251, 247, 236, 0.6);
-    }
-
-    .handoff strong {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-    }
-
-    .handoff span {
-      color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    .output {
+      margin-top: 14px;
+      color: var(--green);
+      font-family: var(--font-mono);
       font-size: 12px;
-      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: 0.02em;
       overflow-wrap: anywhere;
     }
 
-    .connector {
-      width: 2px;
-      height: 22px;
-      margin-left: 79px;
-      background: rgba(36, 51, 47, 0.32);
+    .guardrails {
+      background: #ffffff;
     }
 
-    .quality-strip {
+    .guardrail-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 22px;
+      grid-template-columns: 1.2fr repeat(3, minmax(0, 1fr));
+      gap: 18px;
     }
 
-    .quality {
+    .guardrail-card {
       min-width: 0;
-      padding: 16px;
-      border: 2px solid var(--line);
-      border-radius: 16px;
-      background: #fbf7ec;
-      box-shadow: 4px 5px 0 rgba(22, 38, 31, 0.18);
+      padding: 24px;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: var(--gold-lightest);
+      box-shadow: var(--shadow);
     }
 
-    .quality b {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
+    .guardrail-card.primary {
+      background: var(--green-light);
     }
 
-    .quality span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
+    .guardrail-card h3 {
+      margin: 0;
+      color: var(--house-green);
+      font-size: 23px;
+      line-height: 1.18;
+    }
+
+    .guardrail-card p {
+      margin: 12px 0 0;
+      color: rgba(0, 0, 0, 0.62);
+      font-size: 15px;
+      line-height: 1.58;
     }
 
     .footer {
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 2px solid rgba(36, 51, 47, 0.14);
+      background: var(--house-green);
+      color: rgba(255, 255, 255, 0.75);
+      padding: 34px var(--gutter);
+    }
+
+    .footer-inner {
+      width: min(var(--page-max), 100%);
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      color: var(--muted);
-      font-size: 13px;
+      gap: 18px;
+      font-size: 14px;
     }
 
     .footer strong {
-      color: var(--ink);
+      color: #ffffff;
     }
 
     @media (max-width: 1120px) {
-      .layout {
-        grid-template-columns: 1fr;
+      .topbar-inner {
+        grid-template-columns: 1fr auto;
+        min-height: 72px;
       }
 
-      .sidebar {
-        position: relative;
-        height: auto;
-        padding: 18px;
-        border-right: 0;
-        border-bottom: 2px solid rgba(36, 51, 47, 0.16);
-      }
-
-      .side-note {
-        margin-top: 0;
+      .nav {
+        display: none;
       }
 
       .team-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-visual {
+        position: relative;
+        top: auto;
+        min-height: 340px;
+      }
+
+      .guardrail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
-    @media (max-width: 860px) {
-      .main {
-        padding: 34px 18px 34px;
+    @media (max-width: 820px) {
+      .topbar {
+        min-height: 64px;
+      }
+
+      .topbar-inner {
+        min-height: 64px;
+      }
+
+      .brand {
+        grid-template-columns: 42px auto;
+      }
+
+      .brand-seal {
+        width: 42px;
+      }
+
+      .brand-title {
+        font-size: 15px;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+      }
+
+      .top-actions .pill-outline {
+        display: none;
+      }
+
+      .pill {
+        min-height: 44px;
+        padding: 0 16px;
+        font-size: 14px;
+      }
+
+      .section {
+        padding-block: 56px;
       }
 
       .hero {
-        min-height: 360px;
+        min-height: 520px;
+        text-align: left;
+        place-items: center start;
       }
 
-      .section-head {
-        align-items: start;
-        flex-direction: column;
+      .hero::before {
+        width: 176px;
+        height: 176px;
+        right: -58px;
+        top: 112px;
+        border-width: 30px;
+      }
+
+      .hero::after {
+        width: 86px;
+        height: 86px;
+        left: auto;
+        right: 28px;
+        bottom: 86px;
+      }
+
+      .hero p {
+        margin-left: 0;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+
+      .floating-gate {
+        width: 74px;
+        right: 22px;
+        bottom: 30px;
+        border-width: 6px;
+      }
+
+      .floating-gate strong {
+        font-size: 19px;
+      }
+
+      .tabs-wrap {
+        top: 64px;
+      }
+
+      .section-title {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .team-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .stage {
-        grid-template-columns: 86px minmax(0, 1fr);
+      .guardrail-grid {
+        grid-template-columns: 1fr;
       }
 
-      .stage-number {
-        min-height: 110px;
-      }
-
-      .stage-number strong {
-        font-size: 34px;
-      }
-
-      .handoff {
-        grid-column: 2;
-      }
-
-      .connector {
-        margin-left: 42px;
-      }
-
-      .quality-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .tabs {
-        width: 100%;
-        max-width: calc(100vw - 36px);
-      }
-
-      .tab {
-        flex: 1;
-        min-width: 0;
-        padding: 0 12px;
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
 
-    @media (max-width: 560px) {
-      .main {
-        overflow: hidden;
+    @media (max-width: 540px) {
+      .topbar-inner {
+        gap: 14px;
+      }
+
+      .top-actions .pill-black {
+        padding: 0 14px;
       }
 
       h1 {
-        max-width: calc(100vw - 36px);
-        font-size: clamp(40px, 13vw, 54px);
-        line-height: 0.96;
+        font-size: clamp(38px, 13vw, 56px);
       }
 
-      .intro,
-      .section-head p,
-      .card-body p,
-      .stage-card p,
-      .handoff span {
-        overflow-wrap: anywhere;
+      .hero p {
+        font-size: 17px;
       }
 
-      .tabs {
-        box-shadow: 3px 4px 0 rgba(22, 38, 31, 0.18);
-      }
-
-      .tab {
-        min-height: 42px;
-        padding: 0 8px;
-        font-size: 14px;
-      }
-
-      .team-grid,
-      .quality-strip {
+      .team-grid {
         grid-template-columns: 1fr;
       }
 
-      .member-card,
-      .stage-card,
-      .handoff,
-      .quality {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .portrait::after {
-        width: 58px;
-        font-size: 20px;
-      }
-
-      .stage {
+      .stage-card {
         grid-template-columns: 1fr;
       }
 
-      .stage-number {
-        min-height: 76px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 18px;
+      .pipeline-ring {
+        width: min(76vw, 300px);
+        border-width: 20px;
       }
 
-      .handoff {
-        grid-column: auto;
+      .ring-core {
+        width: 142px;
       }
 
-      .connector {
-        width: 100%;
-        height: 2px;
-        margin-left: 0;
-      }
-
-      .footer {
-        align-items: start;
-        flex-direction: column;
+      .ring-core strong {
+        font-size: 34px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
-    <aside class="sidebar">
-      <a class="brand" href="#top" aria-label="BMP Stock Council">
-        <div class="brand-mark">BMP</div>
-        <div>
-          <p class="brand-title">BMP Stock Council</p>
-          <div class="brand-subtitle">Investor OS</div>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="BMP Stock Council home">
+          <span class="brand-seal">BMP</span>
+          <span>
+            <span class="brand-title">BMP Stock Council</span>
+            <span class="brand-subtitle">Investor OS</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Page navigation">
+          <a href="#team">Team</a>
+          <a href="#pipeline">Pipeline</a>
+          <a href="#guardrails">Guardrails</a>
+          <a href="../README.md">Install</a>
+        </nav>
+        <div class="top-actions">
+          <a class="pill pill-outline" href="../README.md">Install guide</a>
+          <a class="pill pill-black" href="#team">Meet council</a>
         </div>
-      </a>
-
-      <nav aria-label="Page navigation">
-        <p class="nav-label">On this page</p>
-        <div class="nav-group">
-          <a class="nav-link" href="#team"><span>Team grid</span><span>01</span></a>
-          <a class="nav-link" href="#pipeline"><span>Pipeline flow</span><span>02</span></a>
-          <a class="nav-link" href="../README.md"><span>Install guide</span><span>md</span></a>
-        </div>
-      </nav>
-
-      <div class="side-note">
-        Public-source workflow. No private API tokens, no paid data workspaces, and no hidden research notebook required.
       </div>
-    </aside>
+    </header>
 
-    <main class="main" id="top">
-      <section class="hero" aria-labelledby="page-title">
-        <div class="kicker">BMP team map</div>
-        <h1 id="page-title">One stock. Many lenses. One gate.</h1>
-        <p class="intro">
-          BMP Stock Council turns a ticker into a source-backed investment memo by separating research, council judgment, valuation, quality control, reporting, and reusable source curation.
-        </p>
-      </section>
-
-      <div class="tabs" role="tablist" aria-label="View selector">
-        <button class="tab" id="team-tab" type="button" role="tab" aria-selected="true" aria-controls="team-panel">Team grid</button>
-        <button class="tab" id="pipeline-tab" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel">Pipeline flow</button>
-      </div>
-
-      <section class="panel active" id="team-panel" role="tabpanel" aria-labelledby="team-tab">
-        <div class="section-head" id="team">
-          <h2>The council desk</h2>
-          <p>Each role owns a specific artifact, so the workflow can disagree with itself productively before the final report speaks in one clear voice.</p>
+    <main id="top">
+      <section class="section hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Public stock research workflow</p>
+          <h1 id="page-title">BMP Stock Council</h1>
+          <p>
+            One ticker enters. Research, six investor lenses, Bruce's EPV price gate, Checker validation, Reporter synthesis, and Librarian source memory turn it into a public-source investment report.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="pill pill-primary" href="#pipeline">See the pipeline</a>
+            <a class="pill pill-outline" href="#team">View team grid</a>
+          </div>
         </div>
-
-        <div class="team-grid" aria-label="BMP Stock Council team grid">
-          <article class="member-card" style="--accent: var(--green)">
-            <span class="badge">Orchestrator</span>
-            <div class="portrait" data-initials="OS"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Orchestrator</h3>
-              <div class="role">Router and run captain</div>
-              <p>Resolves the ticker, creates the run folder, assigns owners, keeps files isolated, and sends blocked work back to the right desk.</p>
-              <div class="chips"><span class="chip">manifest</span><span class="chip">handoffs</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--teal)">
-            <span class="badge">Research</span>
-            <div class="portrait" data-initials="R"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Researcher</h3>
-              <div class="role">Evidence packet builder</div>
-              <p>Builds the research packet, source log, coverage matrix, missing-evidence queue, and Bruce quantitative inputs from public sources.</p>
-              <div class="chips"><span class="chip">filings</span><span class="chip">web</span><span class="chip">coverage</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--blue)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="W"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Warren Lens</h3>
-              <div class="role">Moat and owner earnings</div>
-              <p>Looks for durable economic castles, rational capital allocation, margin of safety, and evidence that cash flows can compound.</p>
-              <div class="chips"><span class="chip">moat</span><span class="chip">cash flow</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--violet)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="C"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Charlie Lens</h3>
-              <div class="role">Inversion and incentives</div>
-              <p>Hunts for fooling-yourself risks: bad incentives, accounting oddities, leverage, lollapalooza effects, and avoidable stupidity.</p>
-              <div class="chips"><span class="chip">inversion</span><span class="chip">risk</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--amber)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="M"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Mohnish Lens</h3>
-              <div class="role">Downside-first cloning</div>
-              <p>Starts with permanent-loss risk, then asks whether the idea is obvious, cloneable, mispriced, and protected by a simple bet.</p>
-              <div class="chips"><span class="chip">downside</span><span class="chip">clone</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--olive)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="L"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Lu Lens</h3>
-              <div class="role">Long-duration quality</div>
-              <p>Tests whether ecosystem density, reinvestment runway, culture, and owner-like management can survive a long holding period.</p>
-              <div class="chips"><span class="chip">quality</span><span class="chip">duration</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--rose)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="G"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Guy Lens</h3>
-              <div class="role">Behavior and survival</div>
-              <p>Checks whether the thesis is robust against ego, envy, overconfidence, position-size mistakes, and reputational blind spots.</p>
-              <div class="chips"><span class="chip">process</span><span class="chip">temperament</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: var(--red)">
-            <span class="badge">Council</span>
-            <div class="portrait" data-initials="P"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Peter Lens</h3>
-              <div class="role">Simple story and field work</div>
-              <p>Demands a plain-English growth story, customer reality, category legwork, and a thesis simple enough to monitor.</p>
-              <div class="chips"><span class="chip">story</span><span class="chip">scuttlebutt</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: #266d9a">
-            <span class="badge">Price Gate</span>
-            <div class="portrait" data-initials="B"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Bruce</h3>
-              <div class="role">EPV valuation lead</div>
-              <p>Owns the P1 math: sustainable earnings power, EV earnings yield, 5 percent hurdle, margin of safety, and price veto.</p>
-              <div class="chips"><span class="chip">EPV</span><span class="chip">P1</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: #5f5a50">
-            <span class="badge">Quality Gate</span>
-            <div class="portrait" data-initials="Q"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Checker</h3>
-              <div class="role">Audit and validation</div>
-              <p>Verifies formulas, evidence IDs, source URLs, council files, Bruce's math, missing artifacts, and report readiness.</p>
-              <div class="chips"><span class="chip">audit</span><span class="chip">rerun</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: #8a6f24">
-            <span class="badge">Reporting</span>
-            <div class="portrait" data-initials="RP"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Reporter</h3>
-              <div class="role">HTML synthesis</div>
-              <p>Turns the research packet, council votes, Bruce valuation, and Checker audit into the explanation-first final report.</p>
-              <div class="chips"><span class="chip">report</span><span class="chip">QA</span></div>
-            </div>
-          </article>
-
-          <article class="member-card" style="--accent: #44735f">
-            <span class="badge">Knowledge</span>
-            <div class="portrait" data-initials="LB"><span class="signal"><i></i><i></i><i></i></span></div>
-            <div class="card-body">
-              <h3 class="name">Librarian</h3>
-              <div class="role">Source library curator</div>
-              <p>Keeps durable filings, IR materials, industry sources, and recurring references ready for the next run on the same ticker.</p>
-              <div class="chips"><span class="chip">library</span><span class="chip">reuse</span></div>
-            </div>
-          </article>
+        <div class="floating-gate" aria-hidden="true">
+          <span><strong>P1</strong><span>price gate</span></span>
         </div>
       </section>
 
-      <section class="panel" id="pipeline-panel" role="tabpanel" aria-labelledby="pipeline-tab">
-        <div class="section-head" id="pipeline">
-          <h2>The pipeline flow</h2>
-          <p>A ticker moves from question to source-backed answer through explicit handoffs. Checker can bounce any blocked artifact back to its owner.</p>
+      <div class="tabs-wrap" aria-label="View selector">
+        <div class="tabs" aria-label="Section shortcuts">
+          <button class="tab" id="team-tab" type="button" aria-pressed="true">Team grid</button>
+          <button class="tab" id="pipeline-tab" type="button" aria-pressed="false">Pipeline flow</button>
         </div>
+      </div>
 
-        <div class="pipeline-wrap">
-          <div class="flow-map" aria-label="BMP Stock Council pipeline flow">
-            <div class="stage">
-              <div class="stage-number"><strong>01</strong><span>start</span></div>
-              <article class="stage-card" style="--accent: var(--green)">
-                <h3>Ticker brief and scaffold</h3>
-                <p>Orchestrator resolves company identity, exchange, currency, language, and run path, then creates the standard BMP folder structure.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>manifest.json<br>BMP/TICKER_DATE/</span></aside>
+      <section class="panel active" id="team-panel">
+        <div class="section" id="team">
+          <div class="section-title">
+            <div>
+              <div class="section-kicker">1. Team grid</div>
+              <h2>The council desk</h2>
             </div>
-            <div class="connector" aria-hidden="true"></div>
-
-            <div class="stage">
-              <div class="stage-number"><strong>02</strong><span>source</span></div>
-              <article class="stage-card" style="--accent: var(--teal)">
-                <h3>Public research and local library</h3>
-                <p>Researcher checks reusable ticker sources first, then fills gaps with filings, investor relations pages, regulator pages, market pages, news, and web search.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>research_packet<br>source_log<br>coverage_matrix</span></aside>
-            </div>
-            <div class="connector" aria-hidden="true"></div>
-
-            <div class="stage">
-              <div class="stage-number"><strong>03</strong><span>debate</span></div>
-              <article class="stage-card" style="--accent: var(--violet)">
-                <h3>Independent council passes</h3>
-                <p>Warren, Charlie, Mohnish, Lu, Guy, and Peter answer every BMP checklist item independently with bull case, bear case, verdict, confidence, kill condition, and evidence requests.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>council/*.json<br>missing_evidence_requests</span></aside>
-            </div>
-            <div class="connector" aria-hidden="true"></div>
-
-            <div class="stage">
-              <div class="stage-number"><strong>04</strong><span>price</span></div>
-              <article class="stage-card" style="--accent: #266d9a">
-                <h3>Bruce EPV gate</h3>
-                <p>Bruce calculates sustainable earnings power, current EV earnings yield, the 5 percent test, margin of safety, and the Price verdict that can veto the thesis.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>valuation/bruce.json<br>bruce_valuation_review</span></aside>
-            </div>
-            <div class="connector" aria-hidden="true"></div>
-
-            <div class="stage">
-              <div class="stage-number"><strong>05</strong><span>audit</span></div>
-              <article class="stage-card" style="--accent: #5f5a50">
-                <h3>Checker validation loop</h3>
-                <p>Checker audits evidence, URLs, formulas, arithmetic, missing artifacts, Bruce math, and council coverage. Blocking issues return to the exact owner for repair.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>checker_audit<br>revision_requests<br>CLEAR_FOR_REPORT</span></aside>
-            </div>
-            <div class="connector" aria-hidden="true"></div>
-
-            <div class="stage">
-              <div class="stage-number"><strong>06</strong><span>ship</span></div>
-              <article class="stage-card" style="--accent: #8a6f24">
-                <h3>Report and source memory</h3>
-                <p>Reporter produces the explanation-first HTML report. Librarian records durable sources so the next run starts with better context instead of starting from zero.</p>
-              </article>
-              <aside class="handoff"><strong>Output</strong><span>report/*.html<br>report_html_qa.json<br>librarian_review.md</span></aside>
-            </div>
+            <p>Each role owns a distinct artifact, keeping research, judgment, valuation, quality control, reporting, and source curation separate until the final synthesis.</p>
           </div>
 
-          <div class="quality-strip" aria-label="Pipeline guardrails">
-            <div class="quality"><b>Default answer is no</b><span>Missing evidence is a real verdict input, not a bullish placeholder.</span></div>
-            <div class="quality"><b>Public sources only</b><span>Filings, company pages, exchange pages, public market data, reputable news, and web search.</span></div>
-            <div class="quality"><b>Separate owners</b><span>Researcher, council, Bruce, Checker, Reporter, and Librarian write separate artifacts.</span></div>
-            <div class="quality"><b>Checker can block</b><span>The final report waits until validation is clear or warnings are explicit.</span></div>
+          <div class="team-grid" aria-label="BMP Stock Council team grid">
+            <article class="member-card" style="--accent: #006241">
+              <div class="card-swatch"><span class="role-badge">Orchestrator</span><span class="initial">OS</span></div>
+              <div class="member-body">
+                <h3>Orchestrator</h3>
+                <div class="member-role">Router and run captain</div>
+                <p>Resolves the ticker, creates the run folder, assigns owners, and routes blocked work back to the right desk.</p>
+                <div class="chips"><span class="chip">manifest</span><span class="chip">handoffs</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #00754a">
+              <div class="card-swatch"><span class="role-badge">Research</span><span class="initial">R</span></div>
+              <div class="member-body">
+                <h3>Researcher</h3>
+                <div class="member-role">Evidence packet builder</div>
+                <p>Builds the research packet, source log, coverage matrix, missing-evidence queue, and Bruce quantitative inputs.</p>
+                <div class="chips"><span class="chip">filings</span><span class="chip">web</span><span class="chip">coverage</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #1e3932">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">W</span></div>
+              <div class="member-body">
+                <h3>Warren Lens</h3>
+                <div class="member-role">Moat and owner earnings</div>
+                <p>Looks for durable economic castles, rational capital allocation, cash-flow compounding, and margin of safety.</p>
+                <div class="chips"><span class="chip">moat</span><span class="chip">cash flow</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #2b5148">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">C</span></div>
+              <div class="member-body">
+                <h3>Charlie Lens</h3>
+                <div class="member-role">Inversion and incentives</div>
+                <p>Hunts for fooling-yourself risks: incentives, accounting oddities, leverage, feedback loops, and avoidable stupidity.</p>
+                <div class="chips"><span class="chip">inversion</span><span class="chip">risk</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #67896f">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">M</span></div>
+              <div class="member-body">
+                <h3>Mohnish Lens</h3>
+                <div class="member-role">Downside-first cloning</div>
+                <p>Starts with permanent-loss risk, then asks whether the idea is obvious, cloneable, mispriced, and simple.</p>
+                <div class="chips"><span class="chip">downside</span><span class="chip">clone</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #577d68">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">L</span></div>
+              <div class="member-body">
+                <h3>Lu Lens</h3>
+                <div class="member-role">Long-duration quality</div>
+                <p>Tests ecosystem density, reinvestment runway, culture, and owner-like management over a long holding period.</p>
+                <div class="chips"><span class="chip">quality</span><span class="chip">duration</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #4f6f64">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">G</span></div>
+              <div class="member-body">
+                <h3>Guy Lens</h3>
+                <div class="member-role">Behavior and survival</div>
+                <p>Checks the thesis against ego, envy, overconfidence, position-size mistakes, and reputational blind spots.</p>
+                <div class="chips"><span class="chip">process</span><span class="chip">temperament</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #345a50">
+              <div class="card-swatch"><span class="role-badge">Council</span><span class="initial">P</span></div>
+              <div class="member-body">
+                <h3>Peter Lens</h3>
+                <div class="member-role">Simple story and field work</div>
+                <p>Demands a plain-English growth story, customer reality, category legwork, and monitorable thesis.</p>
+                <div class="chips"><span class="chip">story</span><span class="chip">scuttlebutt</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #cba258">
+              <div class="card-swatch"><span class="role-badge">Price Gate</span><span class="initial">B</span></div>
+              <div class="member-body">
+                <h3>Bruce</h3>
+                <div class="member-role">EPV valuation lead</div>
+                <p>Owns sustainable earnings power, EV earnings yield, 5 percent hurdle, margin of safety, and price veto.</p>
+                <div class="chips"><span class="chip">EPV</span><span class="chip">P1</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #5a625d">
+              <div class="card-swatch"><span class="role-badge">Quality Gate</span><span class="initial">Q</span></div>
+              <div class="member-body">
+                <h3>Checker</h3>
+                <div class="member-role">Audit and validation</div>
+                <p>Verifies formulas, evidence IDs, source URLs, council files, Bruce math, artifacts, and report readiness.</p>
+                <div class="chips"><span class="chip">audit</span><span class="chip">rerun</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #876f3a">
+              <div class="card-swatch"><span class="role-badge">Reporting</span><span class="initial">RP</span></div>
+              <div class="member-body">
+                <h3>Reporter</h3>
+                <div class="member-role">HTML synthesis</div>
+                <p>Turns research, council votes, Bruce valuation, and Checker audit into the explanation-first final report.</p>
+                <div class="chips"><span class="chip">report</span><span class="chip">QA</span></div>
+              </div>
+            </article>
+
+            <article class="member-card" style="--accent: #33433d">
+              <div class="card-swatch"><span class="role-badge">Knowledge</span><span class="initial">LB</span></div>
+              <div class="member-body">
+                <h3>Librarian</h3>
+                <div class="member-role">Source library curator</div>
+                <p>Keeps durable filings, IR materials, industry sources, and recurring references ready for the next run.</p>
+                <div class="chips"><span class="chip">library</span><span class="chip">reuse</span></div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <footer class="footer">
-        <span><strong>BMP Stock Council</strong> · public stock analysis workflow</span>
-        <span>Research &rarr; Council &rarr; Price &rarr; Checker &rarr; Report</span>
-      </footer>
+      <section class="panel" id="pipeline-panel">
+        <div class="section pipeline-feature" id="pipeline">
+          <div class="section-title">
+            <div>
+              <div class="section-kicker">2. Pipeline flow</div>
+              <h2>From ticker to report</h2>
+            </div>
+            <p>A BMP run is a sequence of explicit handoffs. Checker can bounce any blocked artifact back to the exact owner before Reporter ships.</p>
+          </div>
+
+          <div class="pipeline-grid">
+            <div class="pipeline-visual" aria-hidden="true">
+              <div class="pipeline-ring">
+                <div class="ring-core">
+                  <span><strong>6</strong><span>handoffs</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pipeline-list" aria-label="BMP Stock Council pipeline">
+              <article class="stage-card" style="--accent: #d4e9e2">
+                <div class="stage-num">01</div>
+                <div>
+                  <h3>Ticker brief and scaffold</h3>
+                  <p>Orchestrator resolves company identity, exchange, currency, language, and run path, then creates the standard BMP folder structure.</p>
+                  <div class="output">manifest.json · BMP/TICKER_DATE/</div>
+                </div>
+              </article>
+
+              <article class="stage-card" style="--accent: #c7e7dc">
+                <div class="stage-num">02</div>
+                <div>
+                  <h3>Public research and local library</h3>
+                  <p>Researcher checks reusable ticker sources first, then fills gaps with filings, company pages, regulator pages, market pages, news, and web search.</p>
+                  <div class="output">research_packet · source_log · coverage_matrix</div>
+                </div>
+              </article>
+
+              <article class="stage-card" style="--accent: #dfc49d">
+                <div class="stage-num">03</div>
+                <div>
+                  <h3>Independent council passes</h3>
+                  <p>Six investor lenses answer every BMP checklist item independently with bull case, bear case, verdict, confidence, kill condition, and evidence requests.</p>
+                  <div class="output">council/*.json · missing_evidence_requests</div>
+                </div>
+              </article>
+
+              <article class="stage-card" style="--accent: #faf6ee">
+                <div class="stage-num">04</div>
+                <div>
+                  <h3>Bruce EPV gate</h3>
+                  <p>Bruce calculates sustainable earnings power, current EV earnings yield, 5 percent hurdle, margin of safety, and the Price verdict.</p>
+                  <div class="output">valuation/bruce.json · bruce_valuation_review</div>
+                </div>
+              </article>
+
+              <article class="stage-card" style="--accent: #edebe9">
+                <div class="stage-num">05</div>
+                <div>
+                  <h3>Checker validation loop</h3>
+                  <p>Checker audits evidence, URLs, formulas, arithmetic, missing artifacts, Bruce math, and council coverage before clearing the report.</p>
+                  <div class="output">checker_audit · revision_requests · CLEAR_FOR_REPORT</div>
+                </div>
+              </article>
+
+              <article class="stage-card" style="--accent: #d4e9e2">
+                <div class="stage-num">06</div>
+                <div>
+                  <h3>Report and source memory</h3>
+                  <p>Reporter produces the explanation-first HTML report. Librarian records durable sources so the next run starts with better context.</p>
+                  <div class="output">report/*.html · report_html_qa.json · librarian_review.md</div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section guardrails" id="guardrails">
+        <div class="section-title">
+          <div>
+            <div class="section-kicker">3. Quality rules</div>
+            <h2>Nothing ships unchecked</h2>
+          </div>
+          <p>The visual style is warm, but the workflow remains deliberately skeptical: public sources, no private tokens, and explicit validation before delivery.</p>
+        </div>
+
+        <div class="guardrail-grid">
+          <article class="guardrail-card primary">
+            <h3>Default answer is no</h3>
+            <p>Missing evidence is a verdict input, not a bullish placeholder. Borderline claims stay marked as insufficient until proven.</p>
+          </article>
+          <article class="guardrail-card">
+            <h3>Public sources only</h3>
+            <p>Filings, investor relations pages, exchange pages, reputable news, public market data, and web search.</p>
+          </article>
+          <article class="guardrail-card">
+            <h3>Separate owners</h3>
+            <p>Researcher, council, Bruce, Checker, Reporter, and Librarian write distinct artifacts and avoid overwriting one another.</p>
+          </article>
+          <article class="guardrail-card">
+            <h3>Checker can block</h3>
+            <p>The final report waits until validation is clear or the warnings are explicit, visible, and accepted by the workflow.</p>
+          </article>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span><strong>BMP Stock Council</strong> · public-stock analysis workflow</span>
+        <span>Research -> Council -> Price -> Checker -> Report</span>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -1001,7 +1220,7 @@
     const navLinks = Array.from(document.querySelectorAll('a[href="#team"], a[href="#pipeline"]'));
 
     function activateTab(tab, scrollTarget) {
-      tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+      tabs.forEach((item) => item.setAttribute("aria-pressed", String(item === tab)));
       panels.forEach((panel) => panel.classList.toggle("active", panel.id === tab.getAttribute("aria-controls")));
       if (scrollTarget) {
         requestAnimationFrame(() => {
@@ -1019,7 +1238,11 @@
     }
 
     tabs.forEach((tab) => {
-      tab.addEventListener("click", () => activateTab(tab));
+      tab.addEventListener("click", () => {
+        const target = tab.id === "pipeline-tab" ? "#pipeline" : "#team";
+        history.pushState(null, "", target);
+        activateTab(tab, target);
+      });
     });
 
     navLinks.forEach((link) => {
