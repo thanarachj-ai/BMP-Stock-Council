@@ -1,4 +1,4 @@
-# BMP
+# BMP Stock Council
 
 BMP is a Codex skill for public-stock deep dives using Adam Seessel's Business, Management, Price checklist plus a multi-agent investor council, Bruce-led Earnings Power Value work, Checker validation, Reporter synthesis, and Librarian source curation.
 
@@ -10,7 +10,7 @@ Clone this repo into your Codex skills folder as `bmp`:
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/YOUR-USERNAME/BMP.git ~/.codex/skills/bmp
+git clone https://github.com/thanarachj-ai/BMP-Stock-Council.git ~/.codex/skills/bmp
 ```
 
 Or download the repo as a ZIP and place the unzipped folder here:
