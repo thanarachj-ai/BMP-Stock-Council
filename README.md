@@ -33,6 +33,10 @@ For another market:
 Use $bmp to analyze CPALL.BK.
 ```
 
+## Visual Overview
+
+Open [`docs/team.html`](docs/team.html) for a visual team grid and pipeline flow of the BMP Stock Council workflow.
+
 ## What The Workflow Produces
 
 - Structured run folder under `BMP/TICKER_YYYY-MM-DD/`

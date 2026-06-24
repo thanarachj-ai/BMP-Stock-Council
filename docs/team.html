@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMP Stock Council Team</title>
+  <style>
+    :root {
+      --paper: #f5efe1;
+      --paper-2: #fbf7ec;
+      --ink: #17221f;
+      --muted: #66706a;
+      --line: #24332f;
+      --sidebar: #efe5d0;
+      --shadow: #16261f;
+      --green: #3b7d64;
+      --teal: #2a8f8a;
+      --blue: #3f6fb6;
+      --violet: #7955a3;
+      --rose: #b25770;
+      --amber: #c48231;
+      --olive: #6f8738;
+      --red: #b85c42;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(23, 34, 31, 0.035) 1px, transparent 1px) 0 0 / 38px 38px,
+        linear-gradient(rgba(23, 34, 31, 0.03) 1px, transparent 1px) 0 0 / 38px 38px,
+        var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      width: 100%;
+      min-width: 0;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-width: 0;
+      padding: 28px 20px 22px;
+      background: var(--sidebar);
+      border-right: 2px solid rgba(36, 51, 47, 0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .brand {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .brand-mark {
+      width: 46px;
+      aspect-ratio: 1;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 68% 30%, #f9d36f 0 10px, transparent 11px),
+        linear-gradient(135deg, #143d35, #2d8a79);
+      box-shadow: 4px 5px 0 var(--shadow);
+      display: grid;
+      place-items: center;
+      color: #fff6df;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.02;
+      font-weight: 900;
+    }
+
+    .brand-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-label {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 38px;
+      padding: 9px 11px;
+      border: 1.5px solid rgba(36, 51, 47, 0.2);
+      border-radius: 999px;
+      color: #263532;
+      background: rgba(251, 247, 236, 0.64);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .nav-link span:last-child {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .side-note {
+      margin-top: auto;
+      padding: 16px;
+      border: 2px solid rgba(36, 51, 47, 0.18);
+      border-radius: 16px;
+      background: rgba(251, 247, 236, 0.65);
+      color: #33413d;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .main {
+      min-width: 0;
+      padding: 54px clamp(24px, 5vw, 72px) 48px;
+    }
+
+    .hero {
+      min-width: 0;
+      min-height: 430px;
+      display: grid;
+      align-content: center;
+      padding-bottom: 46px;
+      border-bottom: 2px solid rgba(36, 51, 47, 0.14);
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 64px;
+      height: 3px;
+      background: currentColor;
+      border-radius: 99px;
+    }
+
+    h1 {
+      width: 100%;
+      max-width: 1020px;
+      margin: 22px 0 18px;
+      font-family: "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
+      font-size: clamp(52px, 9vw, 132px);
+      line-height: 0.88;
+      font-weight: 900;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .intro {
+      width: 100%;
+      max-width: 840px;
+      margin: 0;
+      color: #3c4945;
+      font-size: clamp(17px, 1.8vw, 22px);
+      line-height: 1.55;
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      max-width: 100%;
+      min-width: 0;
+      margin: 34px 0 34px;
+      padding: 5px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-2);
+      box-shadow: 5px 6px 0 rgba(22, 38, 31, 0.18);
+    }
+
+    .tab {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 44px;
+      padding: 0 22px;
+      font: inherit;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .tab[aria-selected="true"] {
+      background: var(--ink);
+      color: #fff9ea;
+    }
+
+    .panel {
+      display: none;
+      min-width: 0;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 0 0 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 0.98;
+      font-weight: 950;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .member-card {
+      --accent: var(--green);
+      min-width: 0;
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      box-shadow: 7px 9px 0 var(--shadow);
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 9px 13px 0 var(--shadow);
+    }
+
+    .badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      margin: 14px 14px 0;
+      padding: 4px 10px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff9ea;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .portrait {
+      position: relative;
+      margin: 12px 14px 0;
+      aspect-ratio: 1 / 0.72;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent) 82%, #ffffff), color-mix(in srgb, var(--accent) 48%, #1d2a27)),
+        var(--accent);
+    }
+
+    .portrait::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 24% 28%, rgba(255, 250, 232, 0.78) 0 9%, transparent 10%),
+        radial-gradient(circle at 78% 18%, rgba(255, 250, 232, 0.55) 0 7%, transparent 8%),
+        linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px) 0 0 / 20px 20px,
+        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px) 0 0 / 20px 20px;
+      transform: rotate(-8deg);
+    }
+
+    .portrait::after {
+      content: attr(data-initials);
+      position: absolute;
+      inset: auto 16px 12px auto;
+      width: 70px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--line);
+      border-radius: 50%;
+      background: #fff7df;
+      color: var(--line);
+      box-shadow: 4px 4px 0 rgba(22, 38, 31, 0.35);
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .signal {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      display: grid;
+      gap: 7px;
+      width: min(52%, 122px);
+    }
+
+    .signal i {
+      display: block;
+      height: 7px;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 249, 234, 0.78);
+    }
+
+    .signal i:nth-child(2) {
+      width: 78%;
+    }
+
+    .signal i:nth-child(3) {
+      width: 58%;
+    }
+
+    .card-body {
+      padding: 14px 16px 18px;
+    }
+
+    .name {
+      margin: 0;
+      font-family: "Bradley Hand", "Marker Felt", "Comic Sans MS", cursive;
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 0.96;
+      font-weight: 900;
+    }
+
+    .role {
+      margin: 9px 0 10px;
+      color: #24332f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .card-body p {
+      margin: 0;
+      color: #46524e;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 5px 8px;
+      border: 1px solid rgba(36, 51, 47, 0.25);
+      border-radius: 999px;
+      background: rgba(245, 239, 225, 0.78);
+      color: #34413d;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .pipeline-wrap {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .flow-map {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding: 6px 0 0;
+      min-width: 0;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) 190px;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .stage-number {
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper-2);
+      box-shadow: 5px 6px 0 rgba(22, 38, 31, 0.22);
+      min-height: 128px;
+    }
+
+    .stage-number strong {
+      font-family: Georgia, serif;
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .stage-number span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stage-card {
+      position: relative;
+      min-width: 0;
+      padding: 20px 22px;
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.54), rgba(255,255,255,0.18)),
+        var(--paper-2);
+      box-shadow: 6px 8px 0 var(--shadow);
+      overflow: hidden;
+    }
+
+    .stage-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 10px;
+      background: var(--accent, var(--green));
+    }
+
+    .stage-card h3 {
+      margin: 0 0 8px;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1;
+    }
+
+    .stage-card p {
+      margin: 0;
+      color: #485550;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .handoff {
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 16px;
+      border: 2px dashed rgba(36, 51, 47, 0.5);
+      border-radius: 18px;
+      background: rgba(251, 247, 236, 0.6);
+    }
+
+    .handoff strong {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .handoff span {
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .connector {
+      width: 2px;
+      height: 22px;
+      margin-left: 79px;
+      background: rgba(36, 51, 47, 0.32);
+    }
+
+    .quality-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .quality {
+      min-width: 0;
+      padding: 16px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fbf7ec;
+      box-shadow: 4px 5px 0 rgba(22, 38, 31, 0.18);
+    }
+
+    .quality b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .quality span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 2px solid rgba(36, 51, 47, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer strong {
+      color: var(--ink);
+    }
+
+    @media (max-width: 1120px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        padding: 18px;
+        border-right: 0;
+        border-bottom: 2px solid rgba(36, 51, 47, 0.16);
+      }
+
+      .side-note {
+        margin-top: 0;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .main {
+        padding: 34px 18px 34px;
+      }
+
+      .hero {
+        min-height: 360px;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stage {
+        grid-template-columns: 86px minmax(0, 1fr);
+      }
+
+      .stage-number {
+        min-height: 110px;
+      }
+
+      .stage-number strong {
+        font-size: 34px;
+      }
+
+      .handoff {
+        grid-column: 2;
+      }
+
+      .connector {
+        margin-left: 42px;
+      }
+
+      .quality-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tabs {
+        width: 100%;
+        max-width: calc(100vw - 36px);
+      }
+
+      .tab {
+        flex: 1;
+        min-width: 0;
+        padding: 0 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .main {
+        overflow: hidden;
+      }
+
+      h1 {
+        max-width: calc(100vw - 36px);
+        font-size: clamp(40px, 13vw, 54px);
+        line-height: 0.96;
+      }
+
+      .intro,
+      .section-head p,
+      .card-body p,
+      .stage-card p,
+      .handoff span {
+        overflow-wrap: anywhere;
+      }
+
+      .tabs {
+        box-shadow: 3px 4px 0 rgba(22, 38, 31, 0.18);
+      }
+
+      .tab {
+        min-height: 42px;
+        padding: 0 8px;
+        font-size: 14px;
+      }
+
+      .team-grid,
+      .quality-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .member-card,
+      .stage-card,
+      .handoff,
+      .quality {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .portrait::after {
+        width: 58px;
+        font-size: 20px;
+      }
+
+      .stage {
+        grid-template-columns: 1fr;
+      }
+
+      .stage-number {
+        min-height: 76px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 18px;
+      }
+
+      .handoff {
+        grid-column: auto;
+      }
+
+      .connector {
+        width: 100%;
+        height: 2px;
+        margin-left: 0;
+      }
+
+      .footer {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="BMP Stock Council">
+        <div class="brand-mark">BMP</div>
+        <div>
+          <p class="brand-title">BMP Stock Council</p>
+          <div class="brand-subtitle">Investor OS</div>
+        </div>
+      </a>
+
+      <nav aria-label="Page navigation">
+        <p class="nav-label">On this page</p>
+        <div class="nav-group">
+          <a class="nav-link" href="#team"><span>Team grid</span><span>01</span></a>
+          <a class="nav-link" href="#pipeline"><span>Pipeline flow</span><span>02</span></a>
+          <a class="nav-link" href="../README.md"><span>Install guide</span><span>md</span></a>
+        </div>
+      </nav>
+
+      <div class="side-note">
+        Public-source workflow. No private API tokens, no paid data workspaces, and no hidden research notebook required.
+      </div>
+    </aside>
+
+    <main class="main" id="top">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="kicker">BMP team map</div>
+        <h1 id="page-title">One stock. Many lenses. One gate.</h1>
+        <p class="intro">
+          BMP Stock Council turns a ticker into a source-backed investment memo by separating research, council judgment, valuation, quality control, reporting, and reusable source curation.
+        </p>
+      </section>
+
+      <div class="tabs" role="tablist" aria-label="View selector">
+        <button class="tab" id="team-tab" type="button" role="tab" aria-selected="true" aria-controls="team-panel">Team grid</button>
+        <button class="tab" id="pipeline-tab" type="button" role="tab" aria-selected="false" aria-controls="pipeline-panel">Pipeline flow</button>
+      </div>
+
+      <section class="panel active" id="team-panel" role="tabpanel" aria-labelledby="team-tab">
+        <div class="section-head" id="team">
+          <h2>The council desk</h2>
+          <p>Each role owns a specific artifact, so the workflow can disagree with itself productively before the final report speaks in one clear voice.</p>
+        </div>
+
+        <div class="team-grid" aria-label="BMP Stock Council team grid">
+          <article class="member-card" style="--accent: var(--green)">
+            <span class="badge">Orchestrator</span>
+            <div class="portrait" data-initials="OS"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Orchestrator</h3>
+              <div class="role">Router and run captain</div>
+              <p>Resolves the ticker, creates the run folder, assigns owners, keeps files isolated, and sends blocked work back to the right desk.</p>
+              <div class="chips"><span class="chip">manifest</span><span class="chip">handoffs</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--teal)">
+            <span class="badge">Research</span>
+            <div class="portrait" data-initials="R"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Researcher</h3>
+              <div class="role">Evidence packet builder</div>
+              <p>Builds the research packet, source log, coverage matrix, missing-evidence queue, and Bruce quantitative inputs from public sources.</p>
+              <div class="chips"><span class="chip">filings</span><span class="chip">web</span><span class="chip">coverage</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--blue)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="W"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Warren Lens</h3>
+              <div class="role">Moat and owner earnings</div>
+              <p>Looks for durable economic castles, rational capital allocation, margin of safety, and evidence that cash flows can compound.</p>
+              <div class="chips"><span class="chip">moat</span><span class="chip">cash flow</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--violet)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="C"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Charlie Lens</h3>
+              <div class="role">Inversion and incentives</div>
+              <p>Hunts for fooling-yourself risks: bad incentives, accounting oddities, leverage, lollapalooza effects, and avoidable stupidity.</p>
+              <div class="chips"><span class="chip">inversion</span><span class="chip">risk</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--amber)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="M"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Mohnish Lens</h3>
+              <div class="role">Downside-first cloning</div>
+              <p>Starts with permanent-loss risk, then asks whether the idea is obvious, cloneable, mispriced, and protected by a simple bet.</p>
+              <div class="chips"><span class="chip">downside</span><span class="chip">clone</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--olive)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="L"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Lu Lens</h3>
+              <div class="role">Long-duration quality</div>
+              <p>Tests whether ecosystem density, reinvestment runway, culture, and owner-like management can survive a long holding period.</p>
+              <div class="chips"><span class="chip">quality</span><span class="chip">duration</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--rose)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="G"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Guy Lens</h3>
+              <div class="role">Behavior and survival</div>
+              <p>Checks whether the thesis is robust against ego, envy, overconfidence, position-size mistakes, and reputational blind spots.</p>
+              <div class="chips"><span class="chip">process</span><span class="chip">temperament</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: var(--red)">
+            <span class="badge">Council</span>
+            <div class="portrait" data-initials="P"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Peter Lens</h3>
+              <div class="role">Simple story and field work</div>
+              <p>Demands a plain-English growth story, customer reality, category legwork, and a thesis simple enough to monitor.</p>
+              <div class="chips"><span class="chip">story</span><span class="chip">scuttlebutt</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: #266d9a">
+            <span class="badge">Price Gate</span>
+            <div class="portrait" data-initials="B"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Bruce</h3>
+              <div class="role">EPV valuation lead</div>
+              <p>Owns the P1 math: sustainable earnings power, EV earnings yield, 5 percent hurdle, margin of safety, and price veto.</p>
+              <div class="chips"><span class="chip">EPV</span><span class="chip">P1</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: #5f5a50">
+            <span class="badge">Quality Gate</span>
+            <div class="portrait" data-initials="Q"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Checker</h3>
+              <div class="role">Audit and validation</div>
+              <p>Verifies formulas, evidence IDs, source URLs, council files, Bruce's math, missing artifacts, and report readiness.</p>
+              <div class="chips"><span class="chip">audit</span><span class="chip">rerun</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: #8a6f24">
+            <span class="badge">Reporting</span>
+            <div class="portrait" data-initials="RP"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Reporter</h3>
+              <div class="role">HTML synthesis</div>
+              <p>Turns the research packet, council votes, Bruce valuation, and Checker audit into the explanation-first final report.</p>
+              <div class="chips"><span class="chip">report</span><span class="chip">QA</span></div>
+            </div>
+          </article>
+
+          <article class="member-card" style="--accent: #44735f">
+            <span class="badge">Knowledge</span>
+            <div class="portrait" data-initials="LB"><span class="signal"><i></i><i></i><i></i></span></div>
+            <div class="card-body">
+              <h3 class="name">Librarian</h3>
+              <div class="role">Source library curator</div>
+              <p>Keeps durable filings, IR materials, industry sources, and recurring references ready for the next run on the same ticker.</p>
+              <div class="chips"><span class="chip">library</span><span class="chip">reuse</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="pipeline-panel" role="tabpanel" aria-labelledby="pipeline-tab">
+        <div class="section-head" id="pipeline">
+          <h2>The pipeline flow</h2>
+          <p>A ticker moves from question to source-backed answer through explicit handoffs. Checker can bounce any blocked artifact back to its owner.</p>
+        </div>
+
+        <div class="pipeline-wrap">
+          <div class="flow-map" aria-label="BMP Stock Council pipeline flow">
+            <div class="stage">
+              <div class="stage-number"><strong>01</strong><span>start</span></div>
+              <article class="stage-card" style="--accent: var(--green)">
+                <h3>Ticker brief and scaffold</h3>
+                <p>Orchestrator resolves company identity, exchange, currency, language, and run path, then creates the standard BMP folder structure.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>manifest.json<br>BMP/TICKER_DATE/</span></aside>
+            </div>
+            <div class="connector" aria-hidden="true"></div>
+
+            <div class="stage">
+              <div class="stage-number"><strong>02</strong><span>source</span></div>
+              <article class="stage-card" style="--accent: var(--teal)">
+                <h3>Public research and local library</h3>
+                <p>Researcher checks reusable ticker sources first, then fills gaps with filings, investor relations pages, regulator pages, market pages, news, and web search.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>research_packet<br>source_log<br>coverage_matrix</span></aside>
+            </div>
+            <div class="connector" aria-hidden="true"></div>
+
+            <div class="stage">
+              <div class="stage-number"><strong>03</strong><span>debate</span></div>
+              <article class="stage-card" style="--accent: var(--violet)">
+                <h3>Independent council passes</h3>
+                <p>Warren, Charlie, Mohnish, Lu, Guy, and Peter answer every BMP checklist item independently with bull case, bear case, verdict, confidence, kill condition, and evidence requests.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>council/*.json<br>missing_evidence_requests</span></aside>
+            </div>
+            <div class="connector" aria-hidden="true"></div>
+
+            <div class="stage">
+              <div class="stage-number"><strong>04</strong><span>price</span></div>
+              <article class="stage-card" style="--accent: #266d9a">
+                <h3>Bruce EPV gate</h3>
+                <p>Bruce calculates sustainable earnings power, current EV earnings yield, the 5 percent test, margin of safety, and the Price verdict that can veto the thesis.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>valuation/bruce.json<br>bruce_valuation_review</span></aside>
+            </div>
+            <div class="connector" aria-hidden="true"></div>
+
+            <div class="stage">
+              <div class="stage-number"><strong>05</strong><span>audit</span></div>
+              <article class="stage-card" style="--accent: #5f5a50">
+                <h3>Checker validation loop</h3>
+                <p>Checker audits evidence, URLs, formulas, arithmetic, missing artifacts, Bruce math, and council coverage. Blocking issues return to the exact owner for repair.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>checker_audit<br>revision_requests<br>CLEAR_FOR_REPORT</span></aside>
+            </div>
+            <div class="connector" aria-hidden="true"></div>
+
+            <div class="stage">
+              <div class="stage-number"><strong>06</strong><span>ship</span></div>
+              <article class="stage-card" style="--accent: #8a6f24">
+                <h3>Report and source memory</h3>
+                <p>Reporter produces the explanation-first HTML report. Librarian records durable sources so the next run starts with better context instead of starting from zero.</p>
+              </article>
+              <aside class="handoff"><strong>Output</strong><span>report/*.html<br>report_html_qa.json<br>librarian_review.md</span></aside>
+            </div>
+          </div>
+
+          <div class="quality-strip" aria-label="Pipeline guardrails">
+            <div class="quality"><b>Default answer is no</b><span>Missing evidence is a real verdict input, not a bullish placeholder.</span></div>
+            <div class="quality"><b>Public sources only</b><span>Filings, company pages, exchange pages, public market data, reputable news, and web search.</span></div>
+            <div class="quality"><b>Separate owners</b><span>Researcher, council, Bruce, Checker, Reporter, and Librarian write separate artifacts.</span></div>
+            <div class="quality"><b>Checker can block</b><span>The final report waits until validation is clear or warnings are explicit.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span><strong>BMP Stock Council</strong> · public stock analysis workflow</span>
+        <span>Research &rarr; Council &rarr; Price &rarr; Checker &rarr; Report</span>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const panels = Array.from(document.querySelectorAll(".panel"));
+    const navLinks = Array.from(document.querySelectorAll('a[href="#team"], a[href="#pipeline"]'));
+
+    function activateTab(tab, scrollTarget) {
+      tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+      panels.forEach((panel) => panel.classList.toggle("active", panel.id === tab.getAttribute("aria-controls")));
+      if (scrollTarget) {
+        requestAnimationFrame(() => {
+          document.querySelector(scrollTarget).scrollIntoView({ block: "start" });
+        });
+      }
+    }
+
+    function activateHash(hash, shouldScroll) {
+      if (hash === "#pipeline") {
+        activateTab(document.querySelector("#pipeline-tab"), shouldScroll ? "#pipeline" : null);
+      } else if (hash === "#team") {
+        activateTab(document.querySelector("#team-tab"), shouldScroll ? "#team" : null);
+      }
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => activateTab(tab));
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        history.pushState(null, "", link.getAttribute("href"));
+        activateHash(location.hash, true);
+      });
+    });
+
+    window.addEventListener("hashchange", () => activateHash(location.hash, true));
+    activateHash(location.hash, Boolean(location.hash));
+  </script>
+</body>
+</html>
