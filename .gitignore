@@ -1,0 +1,53 @@
+.DS_Store
+Thumbs.db
+
+# Local environment and credentials
+.env
+.env.*
+secrets/
+secret/
+keys/
+tokens/
+*.key
+*.pem
+*.rtf
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Generated BMP workspaces and artifacts
+BMP/
+outputs/
+reports/
+runs/
+research/
+source_library/
+cache/
+qa_screenshots/
+qa_shots/
+pdf_qa/
+qa_pdf/
+
+# Generated reports/data
+BMP_*.html
+BMP_*.pdf
+*_report.html
+*_report.pdf
+*_slides.html
+*_slides.pdf
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.pdf
+*.csv
+*.xlsx
+*.xls
+*.jsonl

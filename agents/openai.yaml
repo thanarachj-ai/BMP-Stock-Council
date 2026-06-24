@@ -1,0 +1,7 @@
+interface:
+  display_name: "BMP"
+  short_description: "Council-led public stock reports"
+  brand_color: "#1B5E20"
+  default_prompt: "Use $bmp to analyze AAPL with the BMP checklist, investor council, Bruce EPV valuation, and an explanation-first HTML report."
+policy:
+  allow_implicit_invocation: true

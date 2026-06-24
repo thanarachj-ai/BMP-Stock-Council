@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "members": [
+    {
+      "id": "warren",
+      "display_name": "Warren Lens",
+      "profile": "references/council_members/warren.md",
+      "enabled": true
+    },
+    {
+      "id": "charlie",
+      "display_name": "Charlie Lens",
+      "profile": "references/council_members/charlie.md",
+      "enabled": true
+    },
+    {
+      "id": "mohnish",
+      "display_name": "Mohnish Lens",
+      "profile": "references/council_members/mohnish.md",
+      "enabled": true
+    },
+    {
+      "id": "lu",
+      "display_name": "Lu Lens",
+      "profile": "references/council_members/lu.md",
+      "enabled": true
+    },
+    {
+      "id": "guy",
+      "display_name": "Guy Lens",
+      "profile": "references/council_members/guy.md",
+      "enabled": true
+    },
+    {
+      "id": "peter",
+      "display_name": "Peter Lynch Lens",
+      "profile": "references/council_members/peter.md",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "lead": {
+    "id": "bruce",
+    "display_name": "Bruce Valuation Lead",
+    "profile": "references/valuation_leads/bruce.md",
+    "output": "valuation/bruce.json",
+    "enabled": true
+  }
+}
